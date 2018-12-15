@@ -45,11 +45,15 @@ class NystroemKernelRule
                                 KernelType kernel = KernelType())
   {
     arma::mat G, v;
+    std::cout<<"Rank: " << rank<<std::endl;
     kernel::NystroemMethod<KernelType, PointSelectionPolicy> nm(data, kernel,
         rank);
     nm.Apply(G);
+    std::cout<<"Print G in ApplyKernelMatrix method" <<std::endl;
+    G.print(std::cout);std::cout <<std::endl;
     transformedData = G.t() * G;
-
+    std::cout<<"Print transformedData in ApplyKernelMatrix method" <<std::endl;
+    transformedData.print(std::cout);std::cout <<std::endl;
     // Center the reconstructed approximation.
     math::Center(transformedData, transformedData);
 
@@ -75,6 +79,8 @@ class NystroemKernelRule
     eigvec = arma::fliplr(eigvec);
 
     transformedData = eigvec.t() * G.t();
+    std::cout<<"Print transformedData in ApplyKernelMatrix method" <<std::endl;
+    transformedData.print(std::cout);std::cout <<std::endl;
   }
 };
 

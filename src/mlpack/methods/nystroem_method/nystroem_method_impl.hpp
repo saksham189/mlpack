@@ -79,15 +79,30 @@ void NystroemMethod<KernelType, PointSelectionPolicy>::Apply(arma::mat& output)
 
   GetKernelMatrix(PointSelectionPolicy::Select(data, rank), miniKernel,
                   semiKernel);
-
+  std::cout<<"Print semiKernel in Apply method" <<std::endl;                  
+  semiKernel.print(std::cout);std::cout<<std::endl;
+  std::cout<<"Print miniKernel in Apply method" <<std::endl;                  
+  miniKernel.print(std::cout);std::cout<<std::endl;
   // Singular value decomposition mini-kernel matrix.
   arma::mat U, V;
   arma::vec s;
   arma::svd(U, s, V, miniKernel);
-
+  std::cout<<"Print U in Apply method" <<std::endl;                  
+  U.print(std::cout);std::cout<<std::endl;
+  std::cout<<"Print V in Apply method" <<std::endl;                  
+  V.print(std::cout);std::cout<<std::endl;
+  std::cout<<"Print s in Apply method" <<std::endl;                  
+  s.print(std::cout);std::cout<<std::endl;
   // Construct the output matrix.
   arma::mat normalization = arma::diagmat(1.0 / sqrt(s));
+  
+  std::cout<<"Print normalization in Apply method" <<std::endl;                  
+  normalization.print(std::cout);std::cout<<std::endl;
+  
   output = semiKernel * U * normalization * V;
+  std::cout<<"Print output in Apply method" <<std::endl;
+  output.print(std::cout);std::cout<<std::endl;
+
 }
 
 } // namespace kernel

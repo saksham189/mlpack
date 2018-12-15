@@ -31,10 +31,12 @@ class RandomSelection
    */
   const static arma::Col<size_t> Select(const arma::mat& data, const size_t m)
   {
+    std::cout << "m: " << m <<std::endl;
     arma::Col<size_t> selectedPoints(m);
     for (size_t i = 0; i < m; ++i)
       selectedPoints(i) = math::RandInt(0, data.n_cols);
-
+    std::cout<<"Print selectedPoints in Select method" <<std::endl;
+    selectedPoints.print(std::cout);std::cout <<std::endl;
     return selectedPoints;
   }
 };

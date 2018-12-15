@@ -37,7 +37,8 @@ void KernelPCA<KernelType, KernelRule>::Apply(const arma::mat& data,
 {
   KernelRule::ApplyKernelMatrix(data, transformedData, eigval,
                                 eigvec, newDimension, kernel);
-
+  std::cout<<"Print transformedData in Apply method" <<std::endl;
+  transformedData.print(std::cout);std::cout <<std::endl;
   // Center the transformed data, if the user asked for it.
   if (centerTransformedData)
   {
@@ -45,6 +46,8 @@ void KernelPCA<KernelType, KernelRule>::Apply(const arma::mat& data,
     transformedData = transformedData - (transformedDataMean *
         arma::ones<arma::rowvec>(transformedData.n_cols));
   }
+  std::cout<<"Print transformedData in Apply method" <<std::endl;
+  transformedData.print(std::cout);std::cout <<std::endl;
 }
 
 //! Apply Kernel Principal Component Analysis to the provided data set.
